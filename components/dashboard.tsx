@@ -36,7 +36,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="w-[80%] px-10 pt-15 rounded-r-4xl border border-gray-300 ">
+    <div>
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-3xl font-semibold">Tasks</h2>
         <button
@@ -59,7 +59,14 @@ const Dashboard = () => {
         <tbody>
           {tasks.map((task) => (
             <tr key={task.id} className="mx-4 border-b-2 border-gray-200">
-              <td className="py-2 px-4">{task.title}</td>
+              <td className="py-2 px-4">
+                <h3 className="cursor-pointer group relative">
+                  {task.title}{" "}
+                  <span className="absolute left-0 mt-3 break-words max-w-[100%] bg-gray-100 border border-gray-300 rounded-md p-2 text-sm text-gray-700 hidden group-hover:flex transition-opacity z-10">
+                    {task.description}
+                  </span>
+                </h3>
+              </td>
               <td className="py-2 px-4">
                 <span
                   className={`py-1 px-2 rounded-md ${
