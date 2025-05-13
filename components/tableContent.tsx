@@ -1,12 +1,13 @@
 "use client";
 
 import type { Task } from "@/types";
-import { useState } from "react";
+import { useAtom } from "jotai";
+import { tasksAtom, isModalOpenAtom, editingTaskAtom } from "@/app/atom";
 
 const TableContent = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [, setIsModalOpen] = useState(false);
-  const [, setEditingTask] = useState<Task | null>(null);
+  const [tasks, setTasks] = useAtom(tasksAtom);
+  const [, setIsModalOpen] = useAtom(isModalOpenAtom);
+  const [, setEditingTask] = useAtom(editingTaskAtom);
 
   const handleEditTask = (task: Task) => {
     setEditingTask(task);
@@ -31,9 +32,9 @@ const TableContent = () => {
             <span
               className={`py-1 px-2 rounded-md ${
                 {
-                  todo: "bg-blue-300",
-                  in_progress: "bg-amber-300",
-                  done: "bg-emerald-300",
+                  todo: "bg-rose-300",
+                  in_progress: "bg-indigo-300",
+                  done: "bg-green-300",
                 }[task.status]
               }`}
             >
@@ -50,7 +51,7 @@ const TableContent = () => {
             <span
               className={`py-1 px-2 rounded-md ${
                 {
-                  low: "bg-green-300 ",
+                  low: "bg-gray-300 ",
                   medium: "bg-orange-300",
                   high: "bg-red-300",
                 }[task.priority]
@@ -68,7 +69,7 @@ const TableContent = () => {
             </button>
             <button
               onClick={() => handleDelete(task.id)}
-              className="px-3 py-1 rounded-lg cursor-pointer text-white bg-gray-600 hover:bg-gray-800 transition duration-200 ease-in-out"
+              className="px-3 py-1 rounded-lg cursor-pointer text-white bg-gray-800 hover:bg-gray-600 transition duration-200 ease-in-out"
             >
               Delete
             </button>

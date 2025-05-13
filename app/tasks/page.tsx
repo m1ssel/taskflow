@@ -1,15 +1,16 @@
 "use client";
 
+import type { Task } from "@/types";
+import { useAtom } from "jotai";
+import { v4 as uuidv4 } from "uuid";
+import { tasksAtom, isModalOpenAtom, editingTaskAtom } from "@/app/atom";
 import TableContent from "@/components/tableContent";
 import TaskFormModal from "@/components/taskFormModal";
-import type { Task } from "@/types";
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 const Tasks = () => {
-  const [, setTasks] = useState<Task[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [, setTasks] = useAtom(tasksAtom);
+  const [isModalOpen, setIsModalOpen] = useAtom(isModalOpenAtom);
+  const [editingTask, setEditingTask] = useAtom(editingTaskAtom);
 
   const handleAddTask = () => {
     setEditingTask(null);
